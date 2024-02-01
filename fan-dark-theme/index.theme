@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=fan-dark-theme
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+Name=fan-dark-theme
+GtkTheme=fan-dark-theme
+IconTheme=fan-dark-theme-icons
+MetacityTheme=fan-dark-theme

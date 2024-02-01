@@ -1,0 +1,72 @@
+!    _    ____
+!   / \  | __ )	https://gitlab.com/ifanatical
+!  / _ \ |  _ \
+! / ___ \| |_) |
+!/_/   \_\____/  	
+
+
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: true
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcdfilter
+
+XTerm*renderFont: true
+XTerm*faceName: xft:source code pro, \
+                xft:JoyPixels:size=12, \
+                xft:Monospace:style=Medium:size=12   
+XTerm*faceSize: 11
+XTerm*utf8: 2
+XTerm*locale: true
+
+XTerm*savelines: 16384
+
+URxvt*imLocale: en_US.UTF-8
+URxvt*termName: rxvt-unicode-256color
+URxvt*buffered: false
+URxvt.intensityStyles: false
+URxvt.font: xft:source code pro:size=12, \
+            xft:JoyPixels:size=12, \
+            xft:Monospace:style=Medium:size=12   
+URxvt.saveLines: 2000
+URxvt.scrollBar: false
+URxvt.cursorColor: white
+
+*.foreground:   #bbc2cf
+*.background:   #282c34
+*.cursorColor:  #bbc2cf
+
+! black
+*.color0:       #1c1f24
+*.color8:       #3f444a
+
+! red
+*.color1:       #ff6c6b
+*.color9:       #da8548
+
+! green
+*.color2:       #98be65
+*.color10:      #4db5bd
+
+! yellow
+*.color3:       #da8548
+*.color11:      #ecbe7b
+
+! blue
+*.color4:       #51afef
+*.color12:      #2257A0
+
+! magenta
+*.color5:       #c678dd
+*.color13:      #a9a1e1
+
+! cyan
+*.color6:       #5699af
+*.color14:      #46d9ff
+
+! white
+*.color7:       #202328
+*.color15:      #efefef
+

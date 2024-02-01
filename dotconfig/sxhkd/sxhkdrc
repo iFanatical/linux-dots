@@ -1,0 +1,259 @@
+##########################
+# wm independent hotkeys #
+##########################
+
+# terminal emulator
+super + Return
+	alacritty
+
+# program launcher
+super + d
+	rofi -show drun -show-icons -hover-select -me-select-entry '' -me-accept-entry MousePrimary
+	
+# bin launcher
+super + r
+	rofi -show run -show-icons -hover-select -me-select-entry '' -me-accept-entry MousePrimary
+	
+# file manager
+super + e
+	pcmanfm
+
+# browser
+# Firefox uses uppercase on Debian/Ubuntu
+#super + b
+#		Firefox
+
+# browser
+# firefox uses uppercase on Arch
+super + b
+		firefox
+
+# screenshots
+super + shift + s
+	flameshot gui
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+
+#################
+# bspwm hotkeys #
+#################
+
+# quit bspwm
+super + shift + q
+	bspc quit
+
+# restart bspwm
+super + shift + r
+	bspc wm -r
+
+# close window
+super + shift + c
+	bspc node -c
+	
+# kill window
+super + alt + k
+	bspc node -k
+
+
+# send the newest marked node to the newest preselected node
+super + y
+	bspc node newest.marked.local -n newest.!automatic.local
+
+# swap the current node and the biggest window
+super + ug
+	bspc node -s biggest.window
+
+# rotate curent desktop
+super + g
+	bspc node @/ -R 90
+
+
+###########
+# layouts #
+###########
+
+# set the window state
+# super + t
+# 	bspc node -t tiled
+
+# super + a
+# 	bspc node -t pseudo_tiled
+
+super + t
+	bsp-layout set tiled
+
+super + a
+	bsp-layout set tall
+
+super + shift + space
+	bspc node -t \~floating
+	
+super + f
+	bspc node -t \~fullscreen
+
+# alternate between the tiled and monocle layout
+super + s
+	bspc desktop -l next
+
+
+#########
+# flags #
+#########
+
+# set the node flags
+super + shift + m
+	bspc node -g marked
+	
+super + shift + x
+	bspc node -g locked
+	
+super + shift + y
+	bspc node -g sticky
+	
+super + shift + z
+	bspc node -g private
+
+
+##############
+# focus/swap #
+##############
+
+# focus the node in the given direction
+super + h
+	bspc node -f west
+
+super + j
+	bspc node -f south
+
+super + k
+	bspc node -f north
+
+super + l
+	bspc node -f east
+	
+super + shift + h
+	bspc node -s west
+
+super + shift + j
+	bspc node -s south
+
+super + shift + k
+	bspc node -s north
+
+super + shift + l
+	bspc node -s east
+	
+# focus the node for the given path jump
+super + {semicolon,apostrophe,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous window in the current desktop
+super +  {z,x}
+	bspc node -f {next,prev}.local.!hidden.window
+
+# focus the next/previous desktop in the current monitor
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+# focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# focus the older node in the focus history
+super + o
+	bspc wm -h off; \
+	bspc node older -f; \
+	bspc wm -h on
+
+# focus the newer node in the focus history
+super + i
+	bspc wm -h off; \
+	bspc node newer -f; \
+	bspc wm -h on
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+
+#############
+# preselect #
+#############
+
+# preselect the direction
+super + alt + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+super + alt + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + alt + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+super + alt + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+
+###############
+# move/resize #
+###############
+
+# expand a window by moving one of its side outward
+super + ctrl + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+super + ctrl + alt + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# move a floating window
+super + ctrl + space + {h,j,k,l}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+
+
+############################
+# custom application binds #
+############################
+
+# restart polybar
+super + shift + p
+	$HOME/.config/bspwm/scripts/polybar.sh
+
+
+##############################
+# custom multimedia keybinds #
+##############################
+
+
+# Pulse Audio controls
+# increase sound volume
+XF86AudioRaiseVolume
+	pactl set-sink-volume 2 +5%
+# decrease sound volume
+XF86AudioLowerVolume
+	pactl set-sink-volume 2 -5%
+# mute sound
+XF86AudioMute
+	pactl set-sink-mute 2 toggle
+	
+# Sreen brightness controls
+XF86MonBrightnessUp
+	light -A 5
+XF86MonBrightnessDown
+	light -U 5
+
+# Media player key bindings (need media-sound/playerctl for playerctl.)
+XF86AudioPlay
+	playerctl play-pause
+# bindsym XF86AudioPause exec --no-startup-id playerctl pause &
+XF86AudioNext
+	playerctl next &
+XF86AudioPrev
+	playerctl previous &

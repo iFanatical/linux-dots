@@ -1,0 +1,151 @@
+# Name: Fanatical Doom Theme
+# Author: Aaron Bush <theawpportunist@gmail.com>
+
+# Menu
+menu.border.color: #1e1e1e
+menu.border.width: 1
+
+menu.title.bg: Solid Flat
+menu.title.bg.color: #1c1f24
+menu.title.bg.shadow: 0
+menu.title.text.color: #C6CBC9
+menu.title.text.justify: Center
+
+menu.items.bg: Solid Flat
+menu.items.bg.color: #1c1f24
+menu.items.text.color: #C6CBC9
+menu.items.disabled.text.color: #000000
+
+menu.items.active.bg: Solid Flat
+menu.items.active.bg.color: #51afef
+menu.items.active.text.color: #DDE7E4
+
+menu.separator.color: #51afef
+menu.separator.width: 1
+menu.separator.padding.width: 3
+menu.separator.padding.height: 4
+
+# Window focused
+window.active.title.separator.color: #1c1f24
+
+# Active window
+window.active.border.color: #51afef
+
+window.active.title.bg: flat solid
+window.active.title.bg.color: #1c1f24
+window.active.title.separator.color: #1c1f24
+window.active.text.justify: center
+
+window.active.label.bg: parentrelative
+window.active.label.text.color: #C6CBC9
+
+window.active.handle.bg: flat solid
+window.active.handle.bg.color: #1c1f24
+
+window.active.grip.bg: flat solid
+window.active.grip.bg.color: #1c1f24
+
+window.active.button.unpressed.bg: flat solid
+window.active.button.unpressed.bg.color: #1e1e1e
+window.active.button.unpressed.image.color: #efefef
+
+window.active.button.pressed.bg: flat solid
+window.active.button.pressed.bg.color: #51afef
+window.active.button.pressed.image.color: #ffffff
+
+window.active.button.disabled.bg: flat solid
+window.active.button.disabled.bg.color: #1c1f24
+window.active.button.disabled.image.color: #000000
+
+window.active.button.hover.bg: flat solid
+window.active.button.hover.bg.color: #1c1f24
+window.active.button.hover.image.color: #51afef
+
+#window.active.button.toggled.bg: #169f6f
+#window.active.button.toggled.image.color: #ffffff
+
+# Inactive window
+window.inactive.border.color: #c678dd
+
+window.inactive.title.bg: flat solid
+window.inactive.title.bg.color: #1c1f24
+window.inactive.title.separator.color: #1c1f24
+window.inactive.text.justify: center
+
+window.inactive.label.bg: parentrelative
+window.inactive.label.text.color: #bdbdbd
+
+window.inactive.handle.bg: flat solid
+window.inactive.handle.bg.color: #1c1f24
+
+window.inactive.grip.bg: flat solid
+window.inactive.grip.bg.color: #1c1f24
+
+window.inactive.button.unpressed.bg: flat solid
+window.inactive.button.unpressed.bg.color: #1c1f24
+window.inactive.button.unpressed.image.color: #efefef
+
+window.inactive.button.pressed.bg: flat solid
+window.inactive.button.pressed.bg.color: #51afef
+window.inactive.button.pressed.image.color: #ffffff
+
+window.inactive.button.disabled.bg: flat solid
+window.inactive.button.disabled.bg.color: #bdbdbd
+window.inactive.button.disabled.image.color: #1c1f24
+
+window.inactive.button.hover.bg: flat solid
+window.inactive.button.hover.bg.color: #1c1f24
+window.inactive.button.hover.image.color: #51afef
+
+
+# OSD
+osd.border.width: 1
+osd.border.color: #51afef
+
+osd.bg: flat solid
+osd.bg.color: #1e1e1e
+osd.label.bg: flat solid
+osd.label.bg.color: #1c1f24
+osd.label.text.color: #C6CBC9
+
+# OSD
+osd.bg: Solid Flat
+osd.bg.color: #1c1f24
+osd.bg.shadow: 0
+
+osd.border.width: 2
+osd.hilight.bg: Solid Flat
+osd.hilight.bg.color: #51afef
+osd.unhilight.bg: flat solid
+osd.unhilight.bg.color: #dedede
+
+osd.button.unpressed.bg: flat border
+osd.button.unpressed.bg.color: #51afef
+#osd.button.unpressed.*.border.color: #ffffff
+
+osd.button.pressed.bg: flat border
+osd.button.pressed.bg.color: #51afef
+#osd.button.pressed.*.border.color: #ffffff
+
+osd.button.focused.bg: flat solid border
+osd.button.focused.bg.color: #333333
+#osd.button.focused.*.border.color: #dedede
+
+osd.button.focused.box.color: #51afef
+
+
+# Fonts
+window.active.label.text.font:shadow=n
+window.inactive.label.text.font:shadow=n
+menu.items.font:shadow=n
+menu.title.text.font:shadow=n
+
+
+# Everything else
+border.width: 1
+padding.width: 2
+padding.height: 2
+window.handle.width: 0
+window.client.padding.width: 0
+window.label.text.justify: center
+#menu.overlap: 0

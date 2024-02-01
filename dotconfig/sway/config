@@ -1,0 +1,370 @@
+#####################
+#   UNLOCK KEYRING  #
+#####################
+
+exec --no-startup-id systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11
+
+
+#############
+# variables #
+#############
+
+set $mod Mod4
+set $TERMINAL alacritty
+# set $BROWSER Firefox
+set $BROWSER firefox
+set $FILEMANAGER pcmanfm
+set $RUNNER wofi --show drun
+set $BIN-RUNNER wofi --show run
+set $SCREENSHOT flameshot gui
+
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+    gsettings set $gnome-schema gtk-theme fan-doom-one
+    gsettings set $gnome-schema icon-theme Papirus-Dark
+    gsettings set $gnome-schema cursor-theme Breeze_Snow
+    gsettings set $gnome-schema font-name "Source Code Pro 11"
+}
+
+
+############
+# behavior #
+############
+
+focus_follows_mouse yes
+
+
+#########
+# fonts #
+#########
+
+# font pango:inconsolata 10
+font pango:Ubuntu Mono 12
+
+#############
+# wallpaper #
+#############
+
+output "*" bg $HOME/Pictures/Alternative_4k.jpg fill
+
+
+############
+# keybinds #
+############
+
+set $left h
+set $down j
+set $up k
+set $right l
+
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec --no-startup-id $TERMINAL
+
+# kill focused window
+bindsym $mod+Shift+c kill
+
+# change focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+Shift+v split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+q layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+semicolon focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# "alt-tab" between workspaces
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# reload the configuration file
+bindsym $mod+Shift+e reload
+# restart sway inplace (preserves your layout/session, can be used to upgrade sway)
+bindsym $mod+Shift+r restart
+# exit sway (logs you out of your wayland session)
+bindsym $mod+Shift+q exec "swaymsg exit"
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+a mode "resize"
+
+######################
+# window decorations #
+######################
+
+#  borders and window titles
+for_window [class="^.*"] border pixel 2
+for_window [class="i3-frame"] border pixel 2
+
+#   class                   border  backgr. text    indicator child_border
+client.focused          #51afef #1c1f24dd #ffffff #51afef   #51afef
+client.focused_inactive #51afef #1c1f2480 #ffffff #c678dd   #c678dd
+client.unfocused        #c678dd #1c1f2480 #aaaaaa #c678dd   #c678dd
+client.urgent           #ff6c6b #1c1f2480 #ff6c6b #c678dd   #c678dd
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+client.background       #ffffff
+
+# Add gaps
+gaps inner 4
+gaps outer 2
+gaps horizontal 2
+gaps vertical 2
+gaps top 2
+gaps left 2
+gaps bottom 2
+gaps right 2
+
+#######################
+# custom startup apps #
+#######################
+
+# custom startup programs
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id $HOME/.config/sway/scripts/autostart-programs.sh
+
+
+#######################
+# custom key mappings #
+#######################
+
+input type:keyboard {
+  xkb_options caps:none
+}
+
+
+############################
+# custom application binds #
+############################
+
+
+# wofi drun
+bindsym $mod+d exec --no-startup-id $RUNNER
+
+# wofi run
+bindsym $mod+r exec --no-startup-id $BIN-RUNNER
+
+# flameshot
+bindsym $mod+Shift+S exec --no-startup-id $SCREENSHOT
+
+# file manager
+bindsym $mod+e exec --no-startup-id $FILEMANAGER
+
+# browser
+bindsym $mod+b exec --no-startup-id $BROWSER
+
+
+########################
+# set apps to floating #
+########################
+
+
+# steam chat/friends list floating #
+# for_window[class="steam"] floating enable
+# for_window[class="steamwebhelper"] floating enable
+# for_window[class="steam" title="^Steam$"] floating disable
+# for_window[class="steam_app_*"] floating disable
+
+# browser pop-ups floating #
+for_window [window_role="pop-up"] floating enable
+
+
+# general applications that should be floating #
+for_window [app_id="About"] floating enable
+for_window [app_id="udiskie"] floating enable
+for_window [class="Gufw.py"] floating enable
+for_window [app_id="pavucontrol"] floating enable
+for_window [app_id="Pulseeffects"] floating enable
+for_window [app_id="copyq"] floating enable
+for_window [app_id="Yad"] floating enable
+for_window [app_id="nifskope.exe"] floating enable
+
+# open applications in fullscreen
+# for_window [class="Firefox"] fullscreen
+
+#################################
+# set i3 workspaces on monitors #
+#################################
+
+
+#set $monitor_primary "DisplayPort-2"
+# set $monitor_top "HDMI-A-1"
+#set $monitor_left "DisplayPort-0"
+# set $monitor_top "HDMI-1-0"
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+
+#############################
+# Assign Program Workspaces #
+#############################
+
+# Firefox is uppercase on Debian/Ubuntu
+#assign [app_id="Firefox"] $ws2
+# firefox is lowercase on Arch
+#bassign [app_id="firefox"] $ws2
+assign [class="steam"] $ws3
+assign [class="steamwebhelper"] $ws3
+assign [app_id="lutris"] $ws3
+assign [app_id="virt-manager"] $ws4
+assign [app_id="Virt-manager"] $ws4
+assign [app_id="VirtualBox Manager"] $ws4
+assign [class="discord"] $ws6
+
+
+################################
+# Assign wineserver Workspaces #
+################################
+
+for_window [class="wow.exe"] move container to workspace 4
+for_window [class="Overwatch.exe"] move container to workspace 4
+for_window [class="battle.net.exe"] move container to workspace 4
+for_window [class="nifskope.exe"] move container to workspace 4
+
+
+##############################
+# custom multimedia keybinds #
+##############################
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+# toggle microphone mute - using keycode due to the disabled caps lock above
+bindcode 66 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && paplay $HOME/.config/sway/audio/mute-toggle-quiet.mp3
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen brightness
+
+# Screen brightness for external monitors
+bindsym $mod+KP_Add exec --no-startup-id $screen-brightness up
+bindsym $mod+KP_Subtract exec --no-startup-id $screen-brightness down
+
+# Media player key bindings (need media-sound/playerctl for playerctl.)
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause &
+# bindsym XF86AudioPause exec --no-startup-id playerctl pause &
+bindsym XF86AudioNext exec --no-startup-id playerctl next &
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous &
+
+
+#############
+# statusbar #
+#############
+
+#bar {
+#    status_command i3status
+#    position top
+#    font xft:Ubuntu Mono 9
+#		colors {
+#			separator #1c1f24
+#			background #1c1f24
+#			statusline #ecbe7b
+#								border 		background 	font
+#			focused_workspace 	#51afef 	#1c1f24 	#eeeeee
+#			active_workspace 	#98be65 	#1c1f24 	#eeeeee
+#			inactive_workspace 	#c678dd 	#1c1f24 	#eeeeee
+#			urgent_workspace 	#ff6c6b 	#1c1f24 	#eeeeee
+#  } 
+#}
+

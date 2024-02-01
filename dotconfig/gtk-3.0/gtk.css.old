@@ -1,0 +1,25 @@
+/* Always use background color */
+GtkWindow {
+    background-color: @theme_bg_color;
+}
+
+* {    
+    outline-style: solid;
+    outline-offset: -1px;
+    outline-width: 1px;
+    outline-radius: 1px;
+}
+
+/* Fix tooltip background override */
+.tooltip {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.tooltip * {
+    background-color: transparent;
+}
+
+/* Fix Nautilus desktop window background override */
+NautilusWindow {
+     background-color: transparent; 
+}
