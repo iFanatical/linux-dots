@@ -14,6 +14,11 @@ export VISUAL="emacsclient -c -a emacs"           # $VISUAL use Emacs in GUI mod
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Automatically run tmux
+#if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+#  exec tmux new-session -A -s main
+#fi
+
 # Paths
 export PATH="$HOME/.cargo/bin:$PATH"
 
@@ -28,6 +33,7 @@ alias l.='exa -a | egrep "^\."'
 
 alias ..="cd .."
 alias vim="nvim"
+alias reboot="systemctl reboot"
 alias clear="\clear; source ~/.bashrc"
 alias audacity="GDK_BACKEND=x11 audacity"
 
@@ -40,6 +46,7 @@ alias parsua='paru -Sua --noconfirm'             # update only AUR pkgs (paru)
 alias parsyu='paru -Syu --noconfirm'             # update standard pkgs and AUR pkgs (paru)
 alias unlock='sudo rm /var/lib/pacman/db.lck'    # remove pacman lock
 alias cleanup='sudo pacman -Rns $(pacman -Qtdq)' # remove orphaned packages
+alias installed='pacman -Q | cut -f 1 -d " "' # list installed packages without version number
 
 # get fastest mirrors
 alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
@@ -59,8 +66,10 @@ alias 'bt=bpytop'
 
 #PS1='[\u@\h \W]\$ '
 
-echo -e "$USER\n@$HOSTNAME" | figlet -c | lolcat
-colorscript --exec square
+#echo -e "$USER\n@$HOSTNAME" | figlet -c | lolcat
+#colorscript --exec square
+neofetch
 
 ### SETTING THE STARSHIP PROMPT ###
 eval "$(starship init bash)"
+
