@@ -6,8 +6,8 @@
  ********************************************************************************/
 
 * {
-	foreground:					 rgba ( 70, 217, 255, 100 % );
-	background:					 rgba ( 28, 31, 36, 75 % );
+	foreground:					 rgba ( 129, 161, 193, 100 % );
+	background:					 rgba ( 46, 52, 64, 75 % );
     selected-normal-foreground:  @background;
 
     normal-foreground:           @foreground;

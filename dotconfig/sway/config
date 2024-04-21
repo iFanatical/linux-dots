@@ -2,9 +2,15 @@
 #   UNLOCK KEYRING  #
 #####################
 
+exec --no-startup-id dbus-update-activation-environment --all
+
+
+#####################################
+#   settings for xdg-desktop-portal #
+#####################################
+
 exec --no-startup-id systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11
 
 
 #############
@@ -13,20 +19,21 @@ exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh,secr
 
 set $mod Mod4
 set $TERMINAL alacritty
-# set $BROWSER Firefox
-set $BROWSER firefox
-set $FILEMANAGER pcmanfm
+set $BROWSER thorium-browser
+set $FILEMANAGER thunar
 set $RUNNER wofi --show drun
 set $BIN-RUNNER wofi --show run
-set $SCREENSHOT flameshot gui
+set $SCREENSHOT gscreenshot -s
+set $STEAM steam
 
 set $gnome-schema org.gnome.desktop.interface
 
 exec_always {
-    gsettings set $gnome-schema gtk-theme fan-doom-one
+    gsettings set $gnome-schema gtk-theme nordic-darker
     gsettings set $gnome-schema icon-theme Papirus-Dark
-    gsettings set $gnome-schema cursor-theme Breeze_Snow
+    gsettings set $gnome-schema cursor-theme Breeze_Light
     gsettings set $gnome-schema font-name "Source Code Pro 11"
+    gsettings set $gnome-schema color-scheme 'prefer-dark'
 }
 
 
@@ -34,7 +41,9 @@ exec_always {
 # behavior #
 ############
 
+# active window follows mouse - yes | no | always
 focus_follows_mouse yes
+# fix Mouse cursor on startup 
 
 
 #########
@@ -44,22 +53,17 @@ focus_follows_mouse yes
 # font pango:inconsolata 10
 font pango:Ubuntu Mono 12
 
+
 #############
 # wallpaper #
 #############
 
-output "*" bg $HOME/Pictures/Alternative_4k.jpg fill
+output "*" bg $HOME/Pictures/background/nord-background/mountain_jaws.jpg fill
 
 
 ############
 # keybinds #
 ############
-
-set $left h
-set $down j
-set $up k
-set $right l
-
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -71,10 +75,10 @@ bindsym $mod+Return exec --no-startup-id $TERMINAL
 bindsym $mod+Shift+c kill
 
 # change focus
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -83,16 +87,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
 bindsym $mod+Shift+v split h
@@ -150,10 +148,11 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
 bindsym $mod+Shift+e reload
-# restart sway inplace (preserves your layout/session, can be used to upgrade sway)
+# restart sway inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit sway (logs you out of your wayland session)
-bindsym $mod+Shift+q exec "swaymsg exit"
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+q exec "i3-msg exit"
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -180,48 +179,49 @@ mode "resize" {
 
 bindsym $mod+a mode "resize"
 
+
 ######################
 # window decorations #
 ######################
 
 #  borders and window titles
-for_window [class="^.*"] border pixel 2
-for_window [class="i3-frame"] border pixel 2
+for_window [class="^.*"] border pixel 1
+for_window [class="i3-frame"] border pixel 1
 
-#   class                   border  backgr. text    indicator child_border
-client.focused          #51afef #1c1f24dd #ffffff #51afef   #51afef
-client.focused_inactive #51afef #1c1f2480 #ffffff #c678dd   #c678dd
-client.unfocused        #c678dd #1c1f2480 #aaaaaa #c678dd   #c678dd
-client.urgent           #ff6c6b #1c1f2480 #ff6c6b #c678dd   #c678dd
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+#   class               border          backgr.         text            indicator       child_border
+client.focused          #81A1C1         #1c1f24dd       #ffffff         #81A1C1         #81A1C1
+#client.focused_inactive #81A1C1         #1c1f2480       #ffffff         #c678dd         #c678dd
+#client.unfocused        #c678dd         #1c1f2480       #aaaaaa         #c678dd         #c678dd
+client.urgent           #ff6c6b         #1c1f2480       #ff6c6b         #ff6c6b         #ff6c6b
+client.placeholder      #000000         #0c0c0c         #ffffff         #000000         #0c0c0c
 client.background       #ffffff
 
 # Add gaps
-gaps inner 4
-gaps outer 2
-gaps horizontal 2
-gaps vertical 2
-gaps top 2
-gaps left 2
-gaps bottom 2
-gaps right 2
+#gaps inner 1
+#gaps outer 1
+#gaps horizontal 1
+#gaps vertical 1
+#gaps top 1
+#gaps left 1
+#gaps bottom 1
+#gaps right 1
+
 
 #######################
 # custom startup apps #
 #######################
 
 # custom startup programs
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id $HOME/.config/sway/scripts/autostart-programs.sh
-
-
-#######################
-# custom key mappings #
-#######################
-
-input type:keyboard {
-  xkb_options caps:none
-}
+exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1 &
+exec --no-startup-id xrdb .Xresources
+exec --no-startup-id udiskie &
+exec --no-startup-id numlockx &
+exec --no-startup-id dunst &
+exec --no-startup-id paplay $HOME/.config/i3/audio/windows-vista-startup.mp3 &
+exec --no-startup-id thorium-browser &
+exec --no-startup-id remmina &
+# exec --no-startup-id steam &
+# exec --no-startup-id discord &
 
 
 ############################
@@ -229,14 +229,14 @@ input type:keyboard {
 ############################
 
 
-# wofi drun
+# rofi drun
 bindsym $mod+d exec --no-startup-id $RUNNER
 
-# wofi run
+# rofi run
 bindsym $mod+r exec --no-startup-id $BIN-RUNNER
 
 # flameshot
-bindsym $mod+Shift+S exec --no-startup-id $SCREENSHOT
+bindsym $mod+Shift+S exec --no-startup-id $STEAM
 
 # file manager
 bindsym $mod+e exec --no-startup-id $FILEMANAGER
@@ -245,9 +245,9 @@ bindsym $mod+e exec --no-startup-id $FILEMANAGER
 bindsym $mod+b exec --no-startup-id $BROWSER
 
 
-########################
-# set apps to floating #
-########################
+#######################
+# set app permissions #
+#######################
 
 
 # steam chat/friends list floating #
@@ -256,32 +256,38 @@ bindsym $mod+b exec --no-startup-id $BROWSER
 # for_window[class="steam" title="^Steam$"] floating disable
 # for_window[class="steam_app_*"] floating disable
 
+# set steam friends list #
+for_window [title="^Friends List"] resize set width 20 ppt
+
 # browser pop-ups floating #
 for_window [window_role="pop-up"] floating enable
 
-
 # general applications that should be floating #
-for_window [app_id="About"] floating enable
-for_window [app_id="udiskie"] floating enable
+for_window [class="About"] floating enable
 for_window [class="Gufw.py"] floating enable
+for_window [class="Pavucontrol"] floating enable
 for_window [app_id="pavucontrol"] floating enable
-for_window [app_id="Pulseeffects"] floating enable
-for_window [app_id="copyq"] floating enable
-for_window [app_id="Yad"] floating enable
-for_window [app_id="nifskope.exe"] floating enable
+for_window [class="Arandr"] floating enable
+for_window [class="Pulseeffects"] floating enable
+for_window [class="Nitrogen"] floating enable
+for_window [class="copyq"] floating enable
+for_window [class="Yad"] floating enable
+for_window [class="nifskope.exe"] floating enable
 
 # open applications in fullscreen
 # for_window [class="Firefox"] fullscreen
+for_window [title="^HELLDIVERS™ 2"] fullscreen
+
+# open applications in tabbed mode
+for_window [app_id="org.remmina.Remmina"] layout tabbed
+
 
 #################################
 # set i3 workspaces on monitors #
 #################################
 
-
-#set $monitor_primary "DisplayPort-2"
-# set $monitor_top "HDMI-A-1"
-#set $monitor_left "DisplayPort-0"
-# set $monitor_top "HDMI-1-0"
+output HDMI-A-1 pos 339 0 res 1920x1080
+output DP-4 pos 0 1080 res 2560x1440
 
 set $ws1 "1"
 set $ws2 "2"
@@ -294,23 +300,37 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+set $monitor1 "DP-4"
+set $monitor2 "HDMI-A-1"
+
+workspace $ws1 output $monitor1
+workspace $ws2 output $monitor2
+workspace $ws3 output $monitor1
+workspace $ws4 output $monitor1
+workspace $ws5 output $monitor1
+workspace $ws6 output $monitor2
+workspace $ws7 output $monitor1
+workspace $ws8 output $monitor1
+workspace $ws9 output $monitor1
+workspace $ws10 output $monitor1
+
 
 #############################
 # Assign Program Workspaces #
 #############################
 
 # Firefox is uppercase on Debian/Ubuntu
-#assign [app_id="Firefox"] $ws2
+#assign [class="Firefox"] $ws2
 # firefox is lowercase on Arch
-#bassign [app_id="firefox"] $ws2
+#assign [class="firefox"] $ws2
 assign [class="steam"] $ws3
 assign [class="steamwebhelper"] $ws3
-assign [app_id="lutris"] $ws3
-assign [app_id="virt-manager"] $ws4
-assign [app_id="Virt-manager"] $ws4
-assign [app_id="VirtualBox Manager"] $ws4
+assign [class="Lutris"] $ws3
+assign [class="virt-manager"] $ws4
+assign [class="Virt-manager"] $ws4
+assign [class="VirtualBox Manager"] $ws4
 assign [class="discord"] $ws6
-
+assign [app_id="org.remmina.Remmina"] $ws5
 
 ################################
 # Assign wineserver Workspaces #
@@ -326,20 +346,24 @@ for_window [class="nifskope.exe"] move container to workspace 4
 # custom multimedia keybinds #
 ##############################
 
+
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 # toggle microphone mute - using keycode due to the disabled caps lock above
-bindcode 66 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && paplay $HOME/.config/sway/audio/mute-toggle-quiet.mp3
+# bindcode 66 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && paplay $HOME/.config/i3/audio/mute-toggle-quiet.mp3
+bindcode 202 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 0 && notify-send "Microphone" "Unmuted" && paplay $HOME/.config/sway/audio/unmute.ogg
+bindcode Shift+202 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1  && notify-send "Microphone" "Muted" && paplay $HOME/.config/sway/audio/mute.ogg
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen brightness
+bindsym Shift+Up exec --no-startup-id light -A 5 # increase screen brightness
+bindsym Shift+Down exec --no-startup-id light -U 5 # decrease screen brightness
 
 # Screen brightness for external monitors
 bindsym $mod+KP_Add exec --no-startup-id $screen-brightness up
 bindsym $mod+KP_Subtract exec --no-startup-id $screen-brightness down
+
 
 # Media player key bindings (need media-sound/playerctl for playerctl.)
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause &
@@ -352,19 +376,18 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous &
 # statusbar #
 #############
 
-#bar {
-#    status_command i3status
-#    position top
-#    font xft:Ubuntu Mono 9
-#		colors {
-#			separator #1c1f24
-#			background #1c1f24
-#			statusline #ecbe7b
-#								border 		background 	font
-#			focused_workspace 	#51afef 	#1c1f24 	#eeeeee
-#			active_workspace 	#98be65 	#1c1f24 	#eeeeee
-#			inactive_workspace 	#c678dd 	#1c1f24 	#eeeeee
-#			urgent_workspace 	#ff6c6b 	#1c1f24 	#eeeeee
-#  } 
-#}
-
+bar {
+    status_command i3status-rs /home/fanatical/.config/i3status-rust/config.toml
+    position top
+    font xft:Ubuntu Mono 10
+		colors {
+			separator   #1c1f24
+			background  #1c1f24
+			statusline  #ecbe7b
+#					          border 		  background 	font
+			focused_workspace 	#81A1C1 	  #2E3440 	  #81A1C1
+			active_workspace 	  #81A1C1 	  #2E3440 	  #81A1C1
+			inactive_workspace 	#2E3440 	  #2E3440 	  #5E81AC
+			urgent_workspace 	  #D08770 	  #2E3440 	  #D08770
+  } 
+}

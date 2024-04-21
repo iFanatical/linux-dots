@@ -1,11 +1,12 @@
-#polkit-dumb-agent &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+xrandr --output DP-2 --off --output DP-3 --off --output DP-4 --primary --mode 2560x1440 --pos 0x1080 --rotate normal --output HDMI-2 --off --output DP-1-1 --off --output HDMI-1-1 --mode 1920x1080 --pos 320x0 --rotate normal --output DVI-D-1-1 --off --output DVI-I-1-1 --off &
+xsetroot -cursor_name left_ptr &
+nitrogen --restore &
+$HOME/.config/i3/scripts/xset-screen-blanking.sh &
+picom &
 udiskie &
 numlockx &
-waybar &
-#$HOME/.config/sway/scripts/keyboard-settings.sh &
-paplay $HOME/.config/sway/audio/windows-vista-startup.mp3 &
-#redshift-gtk -l 47.7511:-120.7401 -t 5600:3400 &
-copyq &
+paplay $HOME/.config/i3/audio/windows-vista-startup.mp3 &
+thorium-browser &
 steam &
-firefox &
 discord &

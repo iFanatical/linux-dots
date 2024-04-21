@@ -24,7 +24,7 @@ XTerm*locale: true
 XTerm*savelines: 16384
 
 URxvt*imLocale: en_US.UTF-8
-URxvt*termName: rxvt-unicode-256color
+URxvt*termName: xterm
 URxvt*buffered: false
 URxvt.intensityStyles: false
 URxvt.font: xft:source code pro:size=12, \
@@ -34,39 +34,45 @@ URxvt.saveLines: 2000
 URxvt.scrollBar: false
 URxvt.cursorColor: white
 
-*.foreground:   #bbc2cf
-*.background:   #282c34
-*.cursorColor:  #bbc2cf
+Xcursor.theme: Breeze_Light
+Xcursor.size: 24
+
+*.foreground:   #BBC2CF
+*.background:   #2E3440
+*.cursorColor:  #81A1C1
 
 ! black
-*.color0:       #1c1f24
-*.color8:       #3f444a
+*.color0:       #2E3440
+*.color8:       #4C566A
 
 ! red
-*.color1:       #ff6c6b
-*.color9:       #da8548
+*.color1:       #BF616A
+*.color9:       #FF6C6B
 
 ! green
-*.color2:       #98be65
-*.color10:      #4db5bd
+*.color2:       #A3BE8C
+*.color10:      #8FBCBB
 
 ! yellow
-*.color3:       #da8548
-*.color11:      #ecbe7b
+*.color3:       #EBCB8B
+*.color11:      #ECBE7B
 
 ! blue
-*.color4:       #51afef
-*.color12:      #2257A0
+*.color4:       #5E81AC
+*.color12:      #81A1C1
 
 ! magenta
-*.color5:       #c678dd
-*.color13:      #a9a1e1
+*.color5:       #B48EAD
+*.color13:      #A9A1E1
 
 ! cyan
-*.color6:       #5699af
-*.color14:      #46d9ff
+*.color6:       #88C0D0
+*.color14:      #46D9FF
 
 ! white
-*.color7:       #202328
-*.color15:      #efefef
+*.color7:       #D8DEE9
+*.color15:      #ECEFF4
 
+XTerm.vt100.translations: #override \n\
+    Ctrl Shift <Key>C: copy-selection(CLIPBOARD) \n\
+    Ctrl Shift <Key>V: insert-selection(CLIPBOARD)

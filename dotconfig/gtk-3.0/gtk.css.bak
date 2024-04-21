@@ -1,0 +1,7 @@
+* {    
+    outline-style: solid;
+    outline-offset: -1px;
+    outline-width: 1px;
+    -gtk-outline-radius: 1px;
+}
+@import 'colors.css';

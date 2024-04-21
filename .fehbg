@@ -1,0 +1,2 @@
+#!/bin/sh
+feh --no-fehbg --bg-fill '/home/fanatical/Pictures/background/nord-background/mountain_jaws.jpg' 

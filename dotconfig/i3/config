@@ -3,7 +3,6 @@
 #####################
 
 exec --no-startup-id dbus-update-activation-environment --all
-exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11
 
 
 #############
@@ -13,12 +12,14 @@ exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh,secr
 set $mod Mod4
 set $TERMINAL alacritty
 # set $BROWSER Firefox
-set $BROWSER firefox
+# set $BROWSER firefox
+set $BROWSER thorium-browser
 set $FILEMANAGER pcmanfm
 set $RUNNER rofi -show drun -show-icons -hover-select -me-select-entry '' -me-accept-entry MousePrimary
 set $BIN-RUNNER rofi -show run -show-icons -hover-select -me-select-entry '' -me-accept-entry MousePrimary
 set $SCREENSHOT flameshot gui
-set $screen-brightness $HOME/.config/i3/scripts/screen-brightness.py
+
+set $gnome-schema org.gnome.desktop.interface
 
 
 ############
@@ -68,12 +69,6 @@ bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $mod+Shift+v split h
@@ -168,93 +163,17 @@ bindsym $mod+a mode "resize"
 ######################
 
 #  borders and window titles
-for_window [class="^.*"] border pixel 2
-for_window [class="i3-frame"] border pixel 2
+for_window [class="^.*"] border pixel 1
+for_window [class="i3-frame"] border pixel 1
 
 #   class               border          backgr.         text            indicator       child_border
-client.focused          #46d9ff         #1c1f24dd       #ffffff         #46d9ff         #46d9ff
-client.focused_inactive #46d9ff         #1c1f2480       #ffffff         #c678dd         #c678dd
-client.unfocused        #c678dd         #1c1f2480       #aaaaaa         #c678dd         #c678dd
-client.urgent           #ff6c6b         #1c1f2480       #ff6c6b         #c678dd         #c678dd
+client.focused          #81A1C1         #1c1f24dd       #ffffff         #81A1C1         #81A1C1
+#client.focused_inactive #81A1C1         #1c1f2480       #ffffff         #81A1C1         #81A1C1
+#client.unfocused        #c678dd         #1c1f2480       #aaaaaa         #81A1C1         #81A1C1
+client.urgent           #ff6c6b         #1c1f2480       #ff6c6b         #81A1C1         #81A1C1
 client.placeholder      #000000         #0c0c0c         #ffffff         #000000         #0c0c0c
 client.background       #ffffff
 
-# Add gaps
-gaps inner 4
-gaps outer 2
-gaps horizontal 2
-gaps vertical 2
-gaps top 2
-gaps left 2
-gaps bottom 2
-gaps right 2
-
-
-#######################
-# custom startup apps #
-#######################
-
-
-# monitor positions
-exec --no-startup-id $HOME/.screenlayout/main-layout.sh
-
-# custom startup programs
-exec --no-startup-id $HOME/.config/i3/scripts/autostart-programs.sh
-exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
-
-
-############################
-# custom application binds #
-############################
-
-
-# rofi drun
-bindsym $mod+d exec --no-startup-id $RUNNER
-
-# rofi run
-bindsym $mod+r exec --no-startup-id $BIN-RUNNER
-
-# flameshot
-bindsym $mod+Shift+S exec --no-startup-id $SCREENSHOT
-
-# file manager
-bindsym $mod+e exec --no-startup-id $FILEMANAGER
-
-# browser
-bindsym $mod+b exec --no-startup-id $BROWSER
-
-# restart polybar
-bindsym $mod+Shift+p exec --no-startup-id $HOME/.config/i3/scripts/polybar.sh
-
-
-########################
-# set apps to floating #
-########################
-
-
-# steam chat/friends list floating #
-# for_window[class="steam"] floating enable
-# for_window[class="steamwebhelper"] floating enable
-# for_window[class="steam" title="^Steam$"] floating disable
-# for_window[class="steam_app_*"] floating disable
-
-# browser pop-ups floating #
-for_window [window_role="pop-up"] floating enable
-
-
-# general applications that should be floating #
-for_window [class="About"] floating enable
-for_window [class="Gufw.py"] floating enable
-for_window [class="Pavucontrol"] floating enable
-for_window [class="Arandr"] floating enable
-for_window [class="Pulseeffects"] floating enable
-for_window [class="Nitrogen"] floating enable
-for_window [class="copyq"] floating enable
-for_window [class="Yad"] floating enable
-for_window [class="nifskope.exe"] floating enable
-
-# open applications in fullscreen
-# for_window [class="Firefox"] fullscreen
 
 #################################
 # set i3 workspaces on monitors #
@@ -271,6 +190,95 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+set $monitor1 "DP-3"
+set $monitor2 "HDMI-1-2"
+
+workspace $ws1 output $monitor1
+workspace $ws2 output $monitor2
+workspace $ws3 output $monitor1
+workspace $ws4 output $monitor1
+workspace $ws5 output $monitor1
+workspace $ws6 output $monitor2
+workspace $ws7 output $monitor1
+workspace $ws8 output $monitor1
+workspace $ws9 output $monitor1
+workspace $ws10 output $monitor1
+
+
+#######################
+# custom startup apps #
+#######################
+
+# monitor positions
+exec --no-startup-id xrandr --output DP-3 --primary --mode 2560x1440 --pos 0x1080 --rotate normal --output HDMI-1-2 --mode 1920x1080 --pos 339x0 --rotate normal
+
+# custom startup programs
+exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1 &
+exec --no-startup-id xsetroot -cursor_name left_ptr &
+exec --no-startup-id xsetroot -xcf /usr/share/icons/Breeze_Light/cursors/left_ptr 24
+exec --no-startup-id xset -dpms
+exec --no-startup-id xset s off
+exec --no-startup-id $HOME/.fehbg
+exec --no-startup-id picom &
+exec --no-startup-id udiskie &
+exec --no-startup-id numlockx &
+exec --no-startup-id paplay $HOME/.config/i3/audio/windows-vista-startup.mp3 &
+exec --no-startup-id thorium-browser &
+# exec --no-startup-id steam &
+# exec --no-startup-id discord &
+
+
+############################
+# custom application binds #
+############################
+
+# rofi drun
+bindsym $mod+d exec --no-startup-id $RUNNER
+
+# rofi run
+bindsym $mod+r exec --no-startup-id $BIN-RUNNER
+
+# flameshot
+bindsym $mod+Shift+S exec --no-startup-id $SCREENSHOT
+
+# file manager
+bindsym $mod+e exec --no-startup-id $FILEMANAGER
+
+# browser
+bindsym $mod+b exec --no-startup-id $BROWSER
+
+
+########################
+# set apps to floating #
+########################
+
+# steam chat/friends list floating #
+# for_window[class="steam"] floating enable
+# for_window[class="steamwebhelper"] floating enable
+# for_window[class="steam" title="^Steam$"] floating disable
+# for_window[class="steam_app_*"] floating disable
+
+# set steam friends list #
+for_window [title="^Friends List"] resize set width 20 ppt
+
+# browser pop-ups floating #
+for_window [window_role="pop-up"] floating enable
+
+# general applications that should be floating #
+for_window [class="About"] floating enable
+for_window [class="Gufw.py"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Arandr"] floating enable
+for_window [class="Pulseeffects"] floating enable
+for_window [class="Nitrogen"] floating enable
+for_window [class="copyq"] floating enable
+for_window [class="Yad"] floating enable
+for_window [class="nifskope.exe"] floating enable
+
+# open applications in fullscreen
+# for_window [class="Firefox"] fullscreen
+for_window [class=steam_app_553850] fullscreen
+
 
 #############################
 # Assign Program Workspaces #
@@ -282,6 +290,7 @@ set $ws10 "10"
 #assign [class="firefox"] $ws2
 assign [class="steam"] $ws3
 assign [class="steamwebhelper"] $ws3
+assign [class=steam_app_553850] $ws5
 assign [class="Lutris"] $ws3
 assign [class="virt-manager"] $ws4
 assign [class="Virt-manager"] $ws4
@@ -303,13 +312,14 @@ for_window [class="nifskope.exe"] move container to workspace 4
 # custom multimedia keybinds #
 ##############################
 
-
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 # toggle microphone mute - using keycode due to the disabled caps lock above
 # bindcode 66 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && paplay $HOME/.config/i3/audio/mute-toggle-quiet.mp3
+bindcode 202 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 0 && notify-send "Microphone" "Unmuted" && paplay $HOME/.config/sway/audio/unmute.ogg
+bindcode Shift+202 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1  && notify-send "Microphone" "Muted" && paplay $HOME/.config/sway/audio/mute.ogg
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 # increase screen brightness
@@ -331,18 +341,18 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous &
 # statusbar #
 #############
 
-#bar {
-#    status_command i3status
-#    position top
-#    font xft:Ubuntu Mono 9
-#		colors {
-#			separator #1c1f24
-#			background #1c1f24
-#			statusline #ecbe7b
-#								border 		background 	font
-#			focused_workspace 	#51afef 	#1c1f24 	#eeeeee
-#			active_workspace 	#98be65 	#1c1f24 	#eeeeee
-#			inactive_workspace 	#c678dd 	#1c1f24 	#eeeeee
-#			urgent_workspace 	#ff6c6b 	#1c1f24 	#eeeeee
-#  } 
-#}
+bar {
+    status_command i3status-rs /home/fanatical/.config/i3status-rust/config.toml
+    position top
+    font xft:Ubuntu Mono 12
+		colors {
+			separator   #1c1f24
+			background  #1c1f24
+			statusline  #ecbe7b
+#								          border 		  background 	font
+			focused_workspace 	#8FBCBB 	  #2E3440 	  #88C0D0
+			active_workspace 	  #D8DEE9 	  #2E3440 	  #88C0D0
+			inactive_workspace 	#2E3440 	  #2E3440 	  #5E81AC
+			urgent_workspace 	  #D08770 	  #2E3440 	  #D08770
+  } 
+}
