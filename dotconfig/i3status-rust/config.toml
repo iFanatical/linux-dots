@@ -2,9 +2,11 @@ icons_format = "{icon}"
 
 [theme]
 theme = "nord-dark"
+[theme.overrides]
+idle_fg = "#81A1C1"
 
 [icons]
-icons = "awesome4"
+icons = "awesome6"
 [icons.overrides]
 bat = ["|E|", "|_|", "|=|", "|F|"]
 bat_charging = "|^| "
@@ -30,7 +32,7 @@ format_alt = " $icon_swap $swap_used_percents.eng(w:2) "
 block = "custom"
 command = "uname -r"
 interval = "once"
-format = "{  } $text.pango-str() "
+format = "{} $text.pango-str() "
 
 [[block]]
 block = "disk_space"

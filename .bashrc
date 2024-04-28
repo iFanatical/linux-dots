@@ -31,6 +31,10 @@ alias ll='exa -l --color=always --group-directories-first'  # long format
 alias lt='exa -aT --color=always --group-directories-first' # tree listing
 alias l.='exa -a | egrep "^\."'
 
+# changing cat to utilize bat
+alias cat='bat --theme Nord --paging=never'
+
+
 alias ..="cd .."
 alias vim="nvim"
 alias reboot="systemctl reboot"
@@ -70,6 +74,8 @@ alias 'bt=bpytop'
 #colorscript --exec square
 neofetch
 
-### SETTING THE STARSHIP PROMPT ###
+# starship
 eval "$(starship init bash)"
 
+# zoxide
+eval "$(zoxide init bash)"
