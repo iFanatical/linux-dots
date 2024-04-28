@@ -15,7 +15,6 @@ fi
 
 export GTK_THEME=Nordic
 export XCURSOR_SIZE=24
-export MANGOHUD=1
 export LD_BIND_NOW=1
 export GTK_USE_PORTAL=1
 export TERM=xterm-256color
