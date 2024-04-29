@@ -45,10 +45,33 @@ alert = 10.0
 format = " $icon root: $available.eng(w:2) "
 
 [[block]]
+block = "notify"
+format = " $icon {$paused{Off}|On} "
+driver = "dunst"
+[[block.click]]
+button = "left"
+action = "show"
+[[block.click]]
+button = "right"
+action = "toggle_paused"
+
+[[block]]
 block = "sound"
+format = " $icon { $volume|} "
+max_vol = 100
 [[block.click]]
 button = "left"
 cmd = "pavucontrol"
+
+[[block]]
+block = "sound"
+max_vol = 100
+device_kind = "source"
+format = " $icon { $volume|} "
+[[block.click]]
+button = "left"
+cmd = "pavucontrol"
+
 
 [[block]]
 block = "time"

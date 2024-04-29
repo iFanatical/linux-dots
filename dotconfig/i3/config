@@ -346,7 +346,7 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous &
 bar {
     status_command i3status-rs /home/fanatical/.config/i3status-rust/config.toml
     position top
-    font xft:Ubuntu Mono 10
+    font xft:Ubuntu Mono 11
 		colors {
 			separator   #1c1f24
 			background  #1c1f24
