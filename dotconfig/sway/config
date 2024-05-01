@@ -18,7 +18,7 @@ exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLA
 #############
 
 set $mod Mod4
-set $TERMINAL alacritty
+set $TERMINAL kitty
 set $BROWSER thorium-browser
 set $FILEMANAGER pcmanfm
 set $RUNNER wofi --show drun

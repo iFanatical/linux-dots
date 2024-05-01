@@ -10,7 +10,7 @@ exec --no-startup-id dbus-update-activation-environment --all
 #############
 
 set $mod Mod4
-set $TERMINAL alacritty
+set $TERMINAL kitty
 set $BROWSER $HOME/AppImages/thorium_browser.appimage
 set $FILEMANAGER pcmanfm
 set $RUNNER rofi -show drun -show-icons -hover-select -me-select-entry '' -me-accept-entry MousePrimary
@@ -217,6 +217,9 @@ client.background       #ffffff
 
 # custom startup programs
 exec --no-startup-id xset -dpms &
+exec --no-startup-id xset dpms 0 0 0 &
+exec --no-startup-id xset s noblank &
+exec --no-startup-id xset s off &
 exec --no-startup-id xrandr --output DP-3 --scale 0.9999x0.9999 &
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec --no-startup-id udiskie &
