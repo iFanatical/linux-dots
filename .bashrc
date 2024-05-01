@@ -25,17 +25,18 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # Aliases
 
 # Changing "ls" to "exa"
-alias ls='exa -al --color=always --group-directories-first' # my preferred listing
-alias la='exa -a --color=always --group-directories-first'  # all files and dirs
-alias ll='exa -l --color=always --group-directories-first'  # long format
-alias lt='exa -aT --color=always --group-directories-first' # tree listing
-alias l.='exa -a | egrep "^\."'
+alias ls='exa -alg --color=always --group-directories-first' # my preferred listing
+alias la='exa -ag --color=always --group-directories-first'  # all files and dirs
+alias ll='exa -lg --color=always --group-directories-first'  # long format
+alias lt='exa -aTg --color=always --group-directories-first' # tree listing
+alias l.='exa -ag | grep -E "^\."'
 
 # changing cat to utilize bat
 alias cat='bat --theme Nord --paging=never'
 
-
-alias ..="cd .."
+alias ..="z .."
+alias cd="z"
+alias rm="trash"
 alias vim="nvim"
 alias reboot="systemctl reboot"
 alias clear="\clear; source ~/.bashrc"
