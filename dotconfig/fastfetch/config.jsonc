@@ -1,26 +1,30 @@
 {
     "logo": {
-        "type": "small"
-    },
+        "type": "small",
+     },
     "display": {
         "separator": "\u001b[31m->   "
     },
     "modules": [
         {
+            "key": "Hostname    ",
+            "type": "host"
+        },
+        {
             "key": "Distro      ",
             "type": "os"
+        },
+        {
+            "key": "Kernel      ",
+            "type": "kernel"
         },
         {
             "key": "Shell       ",
             "type": "shell"
         },
         {
-            "key": "Terminal    ",
-            "type": "terminal"
-        },
-        {
-            "key": "Display     ",
-            "type": "display"
+            "key": "Packages    ",
+            "type": "packages"
         },
         {
             "key": "CPU         ",
@@ -29,6 +33,14 @@
         {
             "key": "GPU         ",
             "type": "gpu"
+        },
+        {
+            "key": "Public      ",
+            "type": "publicip"
+        },
+        {
+            "key": "Local       ",
+            "type": "localip"
         },
         "break",
         {
