@@ -1,0 +1,40 @@
+{
+    "logo": {
+        "type": "small"
+    },
+    "display": {
+        "separator": "\u001b[31m->   "
+    },
+    "modules": [
+        {
+            "key": "Distro      ",
+            "type": "os"
+        },
+        {
+            "key": "Shell       ",
+            "type": "shell"
+        },
+        {
+            "key": "Terminal    ",
+            "type": "terminal"
+        },
+        {
+            "key": "Display     ",
+            "type": "display"
+        },
+        {
+            "key": "CPU         ",
+            "type": "cpu"
+        },
+        {
+            "key": "GPU         ",
+            "type": "gpu"
+        },
+        "break",
+        {
+            "type": "colors",
+            "paddingLeft": 6,
+            "symbol": "circle"
+        }
+    ]
+}
