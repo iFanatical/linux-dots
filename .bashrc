@@ -51,7 +51,8 @@ alias parsua='paru -Sua --noconfirm'             # update only AUR pkgs (paru)
 alias parsyu='paru -Syu --noconfirm'             # update standard pkgs and AUR pkgs (paru)
 alias unlock='sudo rm /var/lib/pacman/db.lck'    # remove pacman lock
 alias cleanup='sudo pacman -Rns $(pacman -Qtdq)' # remove orphaned packages
-alias installed='pacman -Q | cut -f 1 -d " "' # list installed packages without version number
+alias pacinstalled='pacman -Q | cut -f 1 -d " "' # list installed packages without version number
+alias yayinstalled='yay -Qm'
 
 # get fastest mirrors
 alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
@@ -73,7 +74,7 @@ alias 'bt=bpytop'
 
 #echo -e "$USER\n@$HOSTNAME" | figlet -c | lolcat
 #colorscript --exec square
-neofetch
+fastfetch
 
 # starship
 eval "$(starship init bash)"
