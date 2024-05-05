@@ -11,7 +11,7 @@ exec --no-startup-id dbus-update-activation-environment --all
 
 set $mod Mod4
 set $TERMINAL kitty
-set $BROWSER $HOME/AppImages/thorium_browser.appimage
+set $BROWSER thorium-browser
 set $FILEMANAGER pcmanfm
 set $RUNNER rofi -show drun -show-icons -hover-select -me-select-entry '' -me-accept-entry MousePrimary
 set $BIN-RUNNER rofi -show run -show-icons -hover-select -me-select-entry '' -me-accept-entry MousePrimary
@@ -220,7 +220,7 @@ exec --no-startup-id xset -dpms &
 exec --no-startup-id xset dpms 0 0 0 &
 exec --no-startup-id xset s noblank &
 exec --no-startup-id xset s off &
-exec --no-startup-id xrandr --output DP-3 --scale 0.9999x0.9999 &
+exec --no-startup-id $HOME/.config/i3/scripts/laptop-xrandr.sh
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec --no-startup-id udiskie &
 exec --no-startup-id numlockx &
@@ -328,13 +328,8 @@ bindcode 202 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 0 && no
 bindcode Shift+202 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1  && notify-send "Microphone" "Muted" && paplay $HOME/.config/i3/audio/mute.ogg
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen brightness
-
-# Screen brightness for external monitors
-bindsym $mod+KP_Add exec --no-startup-id $screen-brightness up
-bindsym $mod+KP_Subtract exec --no-startup-id $screen-brightness down
-
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%-
 
 # Media player key bindings (need media-sound/playerctl for playerctl.)
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause &
