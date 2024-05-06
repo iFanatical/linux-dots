@@ -6,10 +6,8 @@
         "separator": "\u001b[31m->   "
     },
     "modules": [
-        {
-            "key": "Hostname    ",
-            "type": "host"
-        },
+        "title",
+        "separator",
         {
             "key": "Distro      ",
             "type": "os"
