@@ -8,8 +8,14 @@ idle_fg = "#81A1C1"
 [icons]
 icons = "awesome6"
 [icons.overrides]
-bat = ["|E|", "|_|", "|=|", "|F|"]
-bat_charging = "|^| "
+bat = [
+    "| |",
+    "|¼|",
+    "|½|",
+    "|¾|",
+    "|X|",
+]
+bat_charging = "|^|"
 cpu = ""
 
 [[block]]
@@ -62,6 +68,11 @@ format = " $icon { $volume|} "
 [[block.click]]
 button = "left"
 cmd = "pavucontrol"
+
+[[block]]
+block = "battery"
+format = " $icon $percentage "
+missing_format = ""
 
 [[block]]
 block = "time"
