@@ -8,8 +8,8 @@
 export TERM="xterm-256color"                      # getting proper colors
 export HISTCONTROL=ignoredups:erasedups           # no duplicate entries
 export ALTERNATE_EDITOR=""                        # setting for emacsclient
-export EDITOR="emacsclient -t -a ''"              # $EDITOR use Emacs in terminal
-export VISUAL="emacsclient -c -a emacs"           # $VISUAL use Emacs in GUI mode
+export EDITOR="nvim"
+export VISUAL="vscodium"           # $VISUAL use Emacs in GUI mode
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
