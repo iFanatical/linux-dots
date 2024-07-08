@@ -12,6 +12,7 @@ exec --no-startup-id dbus-update-activation-environment --all
 set $mod Mod4
 set $TERMINAL kitty
 set $BROWSER thorium-browser
+set $BROWSER2 firefox
 set $FILEMANAGER pcmanfm
 set $RUNNER rofi -show drun -show-icons -hover-select -me-select-entry '' -me-accept-entry MousePrimary
 set $BIN-RUNNER rofi -show run -show-icons -hover-select -me-select-entry '' -me-accept-entry MousePrimary
@@ -201,6 +202,7 @@ bindsym $mod+a mode "resize"
 #  borders and window titles
 for_window [class="^.*"] border pixel 1
 for_window [class="i3-frame"] border pixel 1
+hide_edge_borders smart
 
 #   class               border          backgr.         text            indicator       child_border
 client.focused          #81A1C1         #1c1f24dd       #ffffff         #81A1C1         #81A1C1
@@ -220,8 +222,9 @@ exec --no-startup-id xset -dpms &
 exec --no-startup-id xset dpms 0 0 0 &
 exec --no-startup-id xset s noblank &
 exec --no-startup-id xset s off &
-exec --no-startup-id $HOME/.config/i3/scripts/laptop-xrandr.sh
+exec --no-startup-id xrandr --output DP-3 --scale 0.9999x0.9999 &
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+exec --no-startup-id $HOME/.config/i3/scripts/keyboard-settings.sh &
 exec --no-startup-id udiskie &
 exec --no-startup-id numlockx &
 exec --no-startup-id nitrogen --restore &
@@ -230,6 +233,7 @@ exec --no-startup-id picom &
 exec --no-startup-id paplay $HOME/.config/i3/audio/windows-vista-startup.mp3 &
 exec --no-startup-id thorium-browser &
 exec --no-startup-id remmina &
+exec --no-startup-id "/opt/Synergy/synergy %U"
 # exec --no-startup-id steam &
 # exec --no-startup-id discord &
 
@@ -253,6 +257,9 @@ bindsym $mod+e exec --no-startup-id $FILEMANAGER
 # browser
 bindsym $mod+b exec --no-startup-id $BROWSER
 
+# secondary browser
+bindsym $mod+Shift+b exec --no-startup-id $BROWSER2
+
 
 #######################
 # set app settings #
@@ -275,6 +282,7 @@ for_window [class="Nitrogen"] floating enable
 for_window [class="copyq"] floating enable
 for_window [class="Yad"] floating enable
 for_window [class="nifskope.exe"] floating enable
+for_window [title="Steam Settings"] floating enable
 
 # open applications in fullscreen
 for_window [title="^HELLDIVERS™ 2"] fullscreen
@@ -282,6 +290,9 @@ for_window [title="^HELLDIVERS™ 2"] fullscreen
 # open applications in tabbed mode
 for_window [title="Remmina Remote Desktop Client"] layout tabbed
 for_window [title="Virtual Machine Manager"] layout tabbed
+
+# for wrye bash
+for_window [title="Select Game"] floating enable
 
 
 #############################
@@ -301,6 +312,7 @@ assign [class="discord"] $ws6
 assign [title="Remmina Remote Desktop Client"] $ws5
 assign [class="pcmanfm"] $ws2
 assign [class="Pcmanfm"] $ws2
+assign [title="TeamSpeak 3"] $ws6
 
 
 ################################
@@ -324,12 +336,17 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # toggle microphone mute - using keycode due to the disabled caps lock above
-bindcode 202 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 0 && notify-send "Microphone" "Unmuted" && paplay $HOME/.config/i3/audio/unmute.ogg
-bindcode Shift+202 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1  && notify-send "Microphone" "Muted" && paplay $HOME/.config/i3/audio/mute.ogg
+bindcode 66 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 0 && notify-send "Microphone" "Unmuted" && paplay $HOME/.config/i3/audio/unmute.ogg
+bindcode Shift+66 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1  && notify-send "Microphone" "Muted" && paplay $HOME/.config/i3/audio/mute.ogg
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10%
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%-
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen brightness
+
+# Screen brightness for external monitors
+bindsym $mod+KP_Add exec --no-startup-id $screen-brightness up
+bindsym $mod+KP_Subtract exec --no-startup-id $screen-brightness down
+
 
 # Media player key bindings (need media-sound/playerctl for playerctl.)
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause &

@@ -20,11 +20,10 @@ exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLA
 set $mod Mod4
 set $TERMINAL kitty
 set $BROWSER thorium-browser
+set $BROWSER2 firefox
 set $FILEMANAGER pcmanfm
 set $RUNNER wofi --show drun
 set $BIN-RUNNER wofi --show run
-set $SCREENSHOT gscreenshot -s
-set $STEAM steam
 
 set $gnome-schema org.gnome.desktop.interface
 
@@ -219,6 +218,7 @@ bindsym $mod+a mode "resize"
 #  borders and window titles
 for_window [class="^.*"] border pixel 1
 for_window [class="i3-frame"] border pixel 1
+hide_edge_borders smart
 
 #   class               border          backgr.         text            indicator       child_border
 client.focused          #81A1C1         #1c1f24dd       #ffffff         #81A1C1         #81A1C1
@@ -285,13 +285,18 @@ for_window [class="Nitrogen"] floating enable
 for_window [class="copyq"] floating enable
 for_window [class="Yad"] floating enable
 for_window [class="nifskope.exe"] floating enable
+for_window [title="Steam Settings"] floating enable
 
 # open applications in fullscreen
 for_window [title="^HELLDIVERS™ 2"] fullscreen
+for_window [app_id="looking-glass-client"] fullscreen
 
 # open applications in tabbed mode
 for_window [app_id="org.remmina.Remmina"] layout tabbed
 for_window [app_id="virt-manager"] layout tabbed
+
+# for wrye bash
+for_window [title="Select Game"] floating enable
 
 
 #############################
@@ -304,13 +309,13 @@ for_window [app_id="virt-manager"] layout tabbed
 #assign [class="firefox"] $ws2
 assign [class="steam"] $ws3
 assign [class="steamwebhelper"] $ws3
-assign [class="Lutris"] $ws3
+assign [app_id="lutris"] $ws3
 assign [app_id="virt-manager"] $ws4
 assign [class="VirtualBox Manager"] $ws4
 assign [class="discord"] $ws6
 assign [app_id="org.remmina.Remmina"] $ws5
 assign [app_id="pcmanfm"] $ws2
-
+assign [app_id="looking-glass-client"] $ws7
 
 ################################
 # Assign wineserver Workspaces #
@@ -357,7 +362,7 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous &
 bar {
     status_command i3status-rs /home/fanatical/.config/i3status-rust/config.toml
     position top
-    font xft:Ubuntu Mono 10
+    font xft:Ubuntu Mono 8
 		colors {
 			separator   #1c1f24
 			background  #1c1f24
