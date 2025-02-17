@@ -34,44 +34,44 @@ URxvt.saveLines: 2000
 URxvt.scrollBar: false
 URxvt.cursorColor: white
 
-Xcursor.theme: Breeze_Light
-Xcursor.size: 24
+Xcursor.theme: Breeze
+Xcursor.size: 18
 
-*.foreground:   #BBC2CF
-*.background:   #2E3440
-*.cursorColor:  #81A1C1
+*.foreground:   #fcfcfc
+*.background:   #232627
+*.cursorColor:  #fcfcfc
 
 ! black
-*.color0:       #2E3440
-*.color8:       #4C566A
+*.color0:       #232627
+*.color8:       #7f8c8d
 
 ! red
-*.color1:       #BF616A
-*.color9:       #FF6C6B
+*.color1:       #ed1515
+*.color9:       #c0392b
 
 ! green
-*.color2:       #A3BE8C
-*.color10:      #8FBCBB
+*.color2:       #11d116
+*.color10:      #1cdc9a
 
 ! yellow
-*.color3:       #EBCB8B
-*.color11:      #ECBE7B
+*.color3:       #f67400
+*.color11:      #fdbc4b
 
 ! blue
-*.color4:       #5E81AC
-*.color12:      #81A1C1
+*.color4:       #1d99f3
+*.color12:      #3daee9
 
 ! magenta
-*.color5:       #B48EAD
-*.color13:      #A9A1E1
+*.color5:       #9b59b6
+*.color13:      #8e44ad
 
 ! cyan
-*.color6:       #88C0D0
-*.color14:      #46D9FF
+*.color6:       #1abc9c
+*.color14:      #16a085
 
 ! white
-*.color7:       #D8DEE9
-*.color15:      #ECEFF4
+*.color7:       #fcfcfc
+*.color15:      #ffffff
 
 XTerm.vt100.translations: #override \n\
     Ctrl Shift <Key>C: copy-selection(CLIPBOARD) \n\

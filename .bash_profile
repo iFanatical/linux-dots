@@ -1,25 +1,13 @@
-# set variables
-# set mozilla environment variable to support Wayland automatically
-if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-    export QT_QPA_PLATFORM="wayland;xcb"
-	export QT_QPA_PLATFORMTHEME="gtk2"
-	export MOZ_ENABLE_WAYLAND=1
-	export SDL_VIDEODRIVER=wayland
-	export _JAVA_AWT_WM_NONREPARENTING=1
-	export QT_QPA_PLATFORM=wayland
-	export XDG_CURRENT_DESKTOP=sway
-	export XDG_SESSION_DESKTOP=sway
-else
-	export MOZ_ENABLE_WAYLAND=0
-fi
-
-export GTK_THEME=Nordic
-export XCURSOR_SIZE=24
 export LD_BIND_NOW=1
 export GTK_USE_PORTAL=1
 export TERM=xterm-256color
-# start wayland session
-# sway
+export LS_COLORS='di=01;34:fi=00;37:ln=01;36:bd=01;33:ex=01;32'
+export XDG_CONFIG_HOME=$HOME/.config
+# export MANGOHUD=1
+export QT_QPA_PLATFORMTHEME=qt5ct
+export XCURSOR_THEME=Breeze
+export XCURSOR_SIZE=18
+export ELECTRON_OZONE_PLATFORM_HINT=wayland
 
 # start xorg session
 #if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
@@ -31,6 +19,13 @@ if [ -f ~/.bashrc ]; then
   . ~/.bashrc
 fi
 
+# start Hyprland on login of TTY1
+if [[ -z $DISPLAY ]] && [[ $(tty) == /dev/tty1 ]]; then
+    $HOME/hyprland.sh
+fi
+
 # Paths
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
 export PF_COL2=1
+
+export PATH=$PATH:/home/fanatical/.spicetify

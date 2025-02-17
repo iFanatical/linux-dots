@@ -1,11 +1,19 @@
-$HOME/.screenlayout/main-layout.sh &
-polkit-dumb-agent &
-picom &
-numlockx &
-polybar openbox &
-conky &
-$HOME/.config/openbox/scripts/xset-screen-blanking.sh &
-$HOME/.config/openbox/scripts/keyboard-settings.sh &
-#redshift-gtk -l 47.7511:-120.7401 -t 5600:3400 &
-nm-applet &
-nitrogen --restore &
+ xset s off -dpms &
+ xset dpms 0 0 0 &
+ xset s noblank &
+ xset s off &
+ $HOME/.screenlayout/ontop.sh
+ /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+ setxkbmap -option caps:none &
+ $HOME/.custom-exes/cmdemo-app/cmdemo_script DP-2 1.2
+ $HOME/.custom-exes/cmdemo-app/cmdemo_script DP-1 1.2
+ udiskie &
+ numlockx &
+ nitrogen --restore &
+ dunst -config $HOME/.config/dunst/dunstrc-xorg &
+ picom &
+ paplay $HOME/.config/i3/audio/windows-vista-startup.mp3 &
+ $HOME/AppImages/bitwarden.appimage &
+ $BROWSER2 &
+ remmina &
+ "/opt/Synergy/synergy %U"
