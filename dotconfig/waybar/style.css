@@ -72,7 +72,7 @@ window#waybar.hidden {
     padding: 0 5px;
     margin: 0 5px 0 0;
     background-color: transparent;
-    color: @magenta;
+    color: @white;
 }
 
 #workspaces button:hover {
@@ -233,12 +233,14 @@ label:focus {
 #pulseaudio {
     background-color: @theme_base_color;
     color: @blue;
+    min-width: 35px;
     box-shadow: inset 0 -2px @blue;
 }
 
 #pulseaudio.muted {
     background-color: @theme_base_color;
     color: @red-bright;
+    min-width: 35px;
     box-shadow: inset 0 -2px @red-bright;
 }
 
@@ -275,7 +277,6 @@ label:focus {
 #tray {
     background-color: @theme_base_color;
     padding: 4px
-    /*box-shadow: inset 0 -2px #232627;*/
 }
 
 #tray > .passive {
