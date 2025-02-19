@@ -8,3 +8,5 @@ DistroTube - .bashrc inspiration, various configuration files that have been hea
 Chris Titus Tech - starship.toml is CTT's, also modified to my liking - an excellent resource for learning how to break your system, and repair it :)
 
 The Nordic theme in this repo is from the AUR, labeled "Nordic"
+
+Rofi launchers not made by me! Find them here: https://github.com/adi1090x/rofi?tab=readme-ov-file
